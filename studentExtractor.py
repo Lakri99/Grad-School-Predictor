@@ -19,7 +19,7 @@ def getAuthSession():
     returns: token(string) - the csrf token value
              session_requests(session object): session with login posted
     """
-    USERNAME = "rblakshmiofficial@gmail.com"
+    USERNAME = "studytonightrb@gmail.com"
     PASSWORD = "priyabashyam"
     LOGIN_URL = "https://yocket.in/account/login"
     session_requests = requests.session()
@@ -114,10 +114,10 @@ def getStudentDetailList(url,session_request = None, admit = None):
     return student_detail
 
 
-def generateStudentList():
+def generateStudentList(start_index):
     """
     generate applied and rejected student detail list for all universities
-    params: None
+    params: start_index(int) - start of range to scrape
     returns: None
     """
     token, session_request = getAuthSession()
@@ -126,9 +126,9 @@ def generateStudentList():
     student_detail_df = pd.DataFrame(pd.read_csv("universityDetailList.csv", header=1))
     header = False
     for index,row in student_detail_df.iterrows():
-        if(index in range(217,301)):
+        if(index in range(start_index,301)):
             print(index)
-#           if(index == 100):
+        #   if(index == start_index):
             student_admit = getStudentDetailList(row['admitList'], session_request, 'admit')
 #             print(student_admit)
             student_admit.to_csv('studentList1.csv', mode = 'a', encoding='utf-8',header = header)

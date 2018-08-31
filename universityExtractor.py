@@ -20,8 +20,8 @@ def open_url_2_soup(url, session_request = None):
     
     """
     proxies = [{
-        "http": 'http://14.102.81.195:21776', 
-        "https": 'http://14.102.81.195:21776'
+        "http": 'http://35.233.225.185:8080', 
+        "https": 'http://35.233.225.185:8080'
     }]
     proxy = random.choice(proxies)
     headers = {'User-Agent':'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36'}
