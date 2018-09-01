@@ -30,12 +30,13 @@ def open_url_2_soup(url, session_request = None):
     else:
         page = session_request.get(url, headers = headers,verify = False, allow_redirects = False)
     if(page.status_code == 200):
+        print("clear")
         page_soup = soup(page.content,'lxml')
         return page_soup
     elif(page.status_code == 302):
         print("error code : ",page.status_code)
         print(url)
-        time.sleep(900)
+        time.sleep(60*60)
         token,session_req = S_ex.getAuthSession()
         open_url_2_soup(url, session_req)
     else:

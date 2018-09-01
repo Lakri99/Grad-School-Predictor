@@ -91,8 +91,12 @@ def getStudentDetailList(url,session_request = None, admit = None):
     """
     page_counter = 1
     student_detail = pd.DataFrame()
-    url = url + "?page="
-    target_url = url + str(page_counter)
+    try:
+        url = url + "?page="
+        target_url = url + str(page_counter)
+    except TypeError:
+            print("url not found:")
+            return student_detail
     while(page_counter <= 50):
         
         try:
@@ -126,13 +130,15 @@ def generateStudentList(start_index):
     student_detail_df = pd.DataFrame(pd.read_csv("universityDetailList.csv", header=1))
     header = False
     for index,row in student_detail_df.iterrows():
-        if(index in range(start_index,301)):
+        if(index in range(start_index,450)):
             print(index)
         #   if(index == start_index):
             student_admit = getStudentDetailList(row['admitList'], session_request, 'admit')
 #             print(student_admit)
-            student_admit.to_csv('studentList1.csv', mode = 'a', encoding='utf-8',header = header)
+            if(student_admit is not None):
+                student_admit.to_csv('studentList1.csv', mode = 'a', encoding='utf-8',header = header)
             header = False
             student_reject = getStudentDetailList(row['rejectList'], session_request, 'reject')
-            student_reject.to_csv('studentList1.csv', mode='a', encoding = 'utf-8', header = header)
+            if(student_reject is not None):
+                student_reject.to_csv('studentList1.csv', mode='a', encoding = 'utf-8', header = header)
 #             time.sleep(120)

@@ -1,4 +1,6 @@
 import universityExtractor as U_ex
 import studentExtractor as S_ex
 
-S_ex.getStudentDetailList("https://yocket.in/applications-admits-rejects/california-state-university-channel-islands/1")
+url = "https://yocket.in/applications-admits-rejects/university-of-connecticut/2?page=5"
+token,session = S_ex.getAuthSession()
+soup = U_ex.open_url_2_soup(url, session_request = session)
